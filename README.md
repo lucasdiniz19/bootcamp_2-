@@ -15,6 +15,9 @@ O **Vansmind CLI** é uma ferramenta de linha de comando que automatiza esse cá
 - Gestores de pequenas frotas de vans.
 ---------------------------------------------------------------------------------------------------------------------------------------
 
+Deploy: bootcamp2-7dqyh7dke-joao-lucas-projects-107f370b.vercel.app
+---------------------------------------------------------------------------------------------------------------------------------------
+
 ## Funcionalidades Principais:
 - **Cálculo de Lucratividade:** Processamento instantâneo do saldo líquido da rota.
 - **Validação de Dados:** Filtro que impede a entrada de valores negativos ou zerados em campos críticos.
@@ -30,8 +33,6 @@ O **Vansmind CLI** é uma ferramenta de linha de comando que automatiza esse cá
 - **JavaScript (ES Modules)**: Utilização de padrões modernos de módulos.
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-Deploy: bootcamp2-7dqyh7dke-joao-lucas-projects-107f370b.vercel.app
----------------------------------------------------------------------------------------------------------------------------------------
 ## Instruções de Instalação:
 Certifique-se de ter o [Node.js] instalado em sua máquina.
 1. Clone o repositório:
