@@ -29,6 +29,7 @@ O **Vansmind CLI** é uma ferramenta de linha de comando que automatiza esse cá
 - **GitHub Actions**: Pipeline de Integração Contínua (CI).
 - **JavaScript (ES Modules)**: Utilização de padrões modernos de módulos.
 ---------------------------------------------------------------------------------------------------------------------------------------
+
 Deploy: bootcamp2-7dqyh7dke-joao-lucas-projects-107f370b.vercel.app
 ---------------------------------------------------------------------------------------------------------------------------------------
 ## Instruções de Instalação:
