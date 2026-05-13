@@ -1,5 +1,6 @@
 import readline from 'readline';
 import { calcularLucro } from './calculadora.js';
+import axios from 'axios'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -37,3 +38,13 @@ rl.question('Preço da gasolina (R$): ', (comb) => {
     });
   });
 });
+
+async function getCotacaoDolar() {
+    try {
+        const response = await axios.get('https://economia.awesomeapi.com.br/last/USD-BRL');
+        return parseFloat(response.data.USDBRL.bid);
+    } catch (error) {
+        console.error("Erro ao buscar API", error);
+        return null;
+    }
+}

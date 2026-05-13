@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>VansMind - Viabilidade</title>
+</head>
+<body>
+    <h1>VansMind CLI Web</h1>
+    <p>Calcule o lucro da sua rota escolar em tempo real.</p>
+    <div id="api-data">Carregando cotação do dólar para conversão...</div>
+    
+    <script type="module">
+        import { buscarCotacao } from './src/api.js';
+        const el = document.getElementById('api-data');
+        buscarCotacao().then(valor => {
+            el.innerText = `Cotação do Dólar hoje: R$ ${valor} (Fonte: AwesomeAPI)`;
+        });
+    </script>
+</body>
+</html>
