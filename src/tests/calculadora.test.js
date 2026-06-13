@@ -15,3 +15,26 @@ describe('Testes de Viabilidade Vansmind', () => {
     expect(res).toBeLessThan(0);
   });
 });
+
+test('Deve rejeitar distância igual a zero', () => {
+  expect(() =>
+    calcularLucro(6.0, 0, 5, 200)
+  ).toThrow();
+});
+
+test('Deve rejeitar quantidade negativa de alunos', () => {
+  expect(() =>
+    calcularLucro(6.0, 10, -1, 200)
+  ).toThrow();
+});
+
+test('Deve calcular o lucro corretamente', () => {
+  const lucro = calcularLucro(8, 20, 10, 200);
+
+  const custoCombustivel = (20 * 2) * (8 / 8);
+  const faturamento = 10 * 200;
+
+  expect(lucro).toBe(
+    faturamento - custoCombustivel
+  );
+});
