@@ -5,16 +5,66 @@
     <title>VansMind - Viabilidade</title>
 </head>
 <body>
-    <h1>VansMind CLI Web</h1>
+
+    <h1>VansMind</h1>
+
     <p>Calcule o lucro da sua rota escolar em tempo real.</p>
-    <div id="api-data">Carregando cotação do dólar para conversão...</div>
-    
+
+    <div id="api-data">
+        Carregando cotação do dólar para conversão...
+    </div>
+
+    <h2>Histórico de Cotações</h2>
+
+    <ul id="historico"></ul>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script type="module">
+
         import { buscarCotacao } from './src/api.js';
+        import {
+            salvarCotacao,
+            buscarHistorico
+        } from './src/supabase.js';
+
         const el = document.getElementById('api-data');
-        buscarCotacao().then(valor => {
-            el.innerText = `Cotação do Dólar hoje: R$ ${valor} (Fonte: AwesomeAPI)`;
-        });
+
+        try {
+
+            const valor = await buscarCotacao();
+
+            el.innerText =
+                `Cotação do Dólar hoje: R$ ${valor} (Fonte: AwesomeAPI)`;
+
+            await salvarCotacao(valor);
+
+            const historico = await buscarHistorico();
+
+            const lista =
+                document.getElementById('historico');
+
+            lista.innerHTML = '';
+
+            historico.forEach(item => {
+
+                const li =
+                    document.createElement('li');
+
+                li.innerText =
+                    `R$ ${item.valor} - ${item.data_consulta}`;
+
+                lista.appendChild(li);
+
+            });
+
+        } catch (erro) {
+
+            console.error(erro);
+
+        }
+
     </script>
+
 </body>
 </html>
