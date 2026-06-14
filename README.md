@@ -15,7 +15,7 @@ O **Vansmind CLI** é uma ferramenta de linha de comando que automatiza esse cá
 - Gestores de pequenas frotas de vans.
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-Deploy: bootcamp2-7dqyh7dke-joao-lucas-projects-107f370b.vercel.app
+Deploy: https://rainbow-zabaione-82b144.netlify.app/
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 ## Funcionalidades Principais:
@@ -65,3 +65,4 @@ Versão Atual: 1.0.0
 Autor: João Lucas Trindade Diniz
 
 Link do Repositório Público: https://github.com/lucasdiniz19/bootcamp_2-
+
