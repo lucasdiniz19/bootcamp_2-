@@ -60,9 +60,11 @@ npm run lint
 ---------------------------------------------------------------------------------------------------------------------------------------
 
  ## Informações Gerais
-Versão Atual: 1.0.0 
+Versão Atual: 2.0.2
 
 Autor: João Lucas Trindade Diniz
+Contribuições: gustavo braga e guilherme tierno 
+
 
 Link do Repositório Público: https://github.com/lucasdiniz19/bootcamp_2-
 
