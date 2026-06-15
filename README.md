@@ -1,3 +1,4 @@
+
 # 🚌 VansMind — Calculadora de Viabilidade Financeira
 
 [![Bootcamp CI](https://github.com/lucasdiniz19/bootcamp_2-/actions/workflows/ci.yml/badge.svg)](https://github.com/lucasdiniz19/bootcamp_2-/actions/workflows/ci.yml)
@@ -100,6 +101,7 @@ bootcamp_2-/
 ```bash
 # 1. Clone o repositório
 git clone https://github.com/lucasdiniz19/bootcamp_2-
+
 cd bootcamp_2-
 
 # 2. Instale as dependências
@@ -254,4 +256,12 @@ SUPABASE_ANON_KEY=sua-chave-anonima
 
 ---
 
-**Versão:** 2.0.0 · **Autor:** João Lucas Trindade Diniz · [Repositório](https://github.com/lucasdiniz19/bootcamp_2-)
+## Informações Gerais
+
+**Versão Atual:** 2.0.2
+
+**Autor:** João Lucas Trindade Diniz
+
+**Contribuições:** Gustavo Braga e Guilherme Tierno
+
+**Repositório:** https://github.com/lucasdiniz19/bootcamp_2-
