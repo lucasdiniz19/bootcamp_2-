@@ -1,70 +1,483 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>VansMind - Viabilidade</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VansMind — Viabilidade de Rota Escolar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --bg:        #0d1117;
+      --surface:   #161b22;
+      --border:    #21262d;
+      --accent:    #f0a500;
+      --accent-dim:#f0a50022;
+      --green:     #3fb950;
+      --red:       #f85149;
+      --text:      #e6edf3;
+      --muted:     #8b949e;
+      --radius:    12px;
+      --font-head: 'Sora', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── HEADER ─────────────────────────────────────────────── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+    }
+    .logo {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    nav { display: flex; gap: 8px; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    nav a:hover, nav a.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    /* ─── MAIN ───────────────────────────────────────────────── */
+    main {
+      flex: 1;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+      width: 100%;
+    }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    /* ─── TICKER ─────────────────────────────────────────────── */
+    #ticker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    #ticker .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ─── GRID ───────────────────────────────────────────────── */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ─── CARD ───────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .card h2 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    /* ─── FORM ───────────────────────────────────────────────── */
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .field label { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+    .field input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 10px 14px;
+      font-size: 0.92rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .field input:focus { border-color: var(--accent); }
+    .field input::placeholder { color: var(--muted); }
+
+    button.primary {
+      width: 100%;
+      padding: 12px;
+      background: var(--accent);
+      color: #000;
+      font-family: var(--font-head);
+      font-size: 0.92rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    button.primary:hover { opacity: 0.88; }
+    button.primary:active { transform: scale(0.98); }
+
+    /* ─── RESULT ─────────────────────────────────────────────── */
+    #result {
+      display: none;
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .result-row:last-of-type { border-bottom: none; }
+    .result-row .label { color: var(--muted); }
+    .result-row .value { font-weight: 600; }
+
+    .status-badge {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+    .status-badge.lucro  { background: #3fb95022; border: 1px solid #3fb950; color: var(--green); }
+    .status-badge.prejuizo { background: #f8514922; border: 1px solid #f85149; color: var(--red); }
+    .status-badge svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* ─── HISTORY ────────────────────────────────────────────── */
+    #history-section { margin-top: 40px; }
+    #history-section h2 {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #history-section h2 button {
+      font-size: 0.75rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 4px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #history-section h2 button:hover { border-color: var(--red); color: var(--red); }
+
+    #history-list { display: flex; flex-direction: column; gap: 10px; }
+    .history-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+    .history-item .meta { color: var(--muted); }
+    .history-item .meta strong { color: var(--text); display: block; margin-bottom: 2px; }
+    .history-item .badge {
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+    .badge.lucro   { background: #3fb95022; color: var(--green); }
+    .badge.prejuizo { background: #f8514922; color: var(--red); }
+    #empty-history {
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+      padding: 28px;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 32px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
 </head>
 <body>
 
-    <h1>VansMind</h1>
 
-    <p>Calcule o lucro da sua rota escolar em tempo real.</p>
+  <header>
+    <div class="logo">Vans<span>Mind</span></div>
+    <nav>
+      <a href="#calculadora" class="active">Calculadora</a>
+      <a href="#history-section">Histórico</a>
+      <a href="https://github.com/lucasdiniz19/bootcamp_2-" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </header>
 
-    <div id="api-data">
-        Carregando cotação do dólar para conversão...
+  <main>
+    <section class="hero">
+      <h1>Calcule a <em>viabilidade real</em><br>da sua rota escolar</h1>
+      <p>Insira os dados da rota e descubra em segundos se ela é lucrativa — com base no preço atual do diesel.</p>
+      <div id="ticker">
+        <span class="dot"></span>
+        <span id="ticker-text">Carregando cotação do dólar...</span>
+      </div>
+    </section>
+
+    <div class="grid" id="calculadora">
+      <!-- FORMULÁRIO -->
+      <div class="card">
+        <h2>Dados da Rota</h2>
+
+        <div class="field">
+          <label for="preco-diesel">Preço do Diesel (R$/litro)</label>
+          <input type="number" id="preco-diesel" placeholder="Ex: 6.50" min="0" step="0.01" />
+        </div>
+        <div class="field">
+          <label for="distancia">Distância diária (km)</label>
+          <input type="number" id="distancia" placeholder="Ex: 80" min="0" />
+        </div>
+        <div class="field">
+          <label for="alunos">Número de alunos</label>
+          <input type="number" id="alunos" placeholder="Ex: 20" min="1" />
+        </div>
+        <div class="field">
+          <label for="mensalidade">Mensalidade por aluno (R$)</label>
+          <input type="number" id="mensalidade" placeholder="Ex: 350.00" min="0" step="0.01" />
+        </div>
+        <div class="field">
+          <label for="consumo">Consumo do veículo (km/litro)</label>
+          <input type="number" id="consumo" placeholder="Ex: 10" min="0.1" step="0.1" />
+        </div>
+        <div class="field">
+          <label for="dias">Dias úteis por mês</label>
+          <input type="number" id="dias" placeholder="Ex: 22" min="1" max="31" />
+        </div>
+
+        <button class="primary" onclick="calcular()">Calcular Viabilidade</button>
+
+        <div id="result">
+          <div class="result-row"><span class="label">Receita mensal</span><span class="value" id="res-receita">—</span></div>
+          <div class="result-row"><span class="label">Custo com combustível</span><span class="value" id="res-custo">—</span></div>
+          <div class="result-row"><span class="label">Lucro líquido</span><span class="value" id="res-lucro">—</span></div>
+          <div class="result-row"><span class="label">Margem</span><span class="value" id="res-margem">—</span></div>
+          <div id="status-badge" class="status-badge"></div>
+        </div>
+      </div>
+
+      <!-- RESUMO / DICAS -->
+      <div class="card">
+        <h2>Como funciona o cálculo</h2>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="padding:14px;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
+            <div style="font-size:0.78rem;color:var(--accent);font-weight:700;margin-bottom:6px;">RECEITA MENSAL</div>
+            <div style="font-size:0.85rem;color:var(--muted);line-height:1.5;">Nº de alunos × mensalidade</div>
+          </div>
+          <div style="padding:14px;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
+            <div style="font-size:0.78rem;color:var(--accent);font-weight:700;margin-bottom:6px;">CUSTO DE COMBUSTÍVEL</div>
+            <div style="font-size:0.85rem;color:var(--muted);line-height:1.5;">(Distância × dias úteis ÷ consumo) × preço do diesel</div>
+          </div>
+          <div style="padding:14px;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
+            <div style="font-size:0.78rem;color:var(--accent);font-weight:700;margin-bottom:6px;">LUCRO LÍQUIDO</div>
+            <div style="font-size:0.85rem;color:var(--muted);line-height:1.5;">Receita − Custo de combustível</div>
+          </div>
+          <div style="padding:14px;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
+            <div style="font-size:0.78rem;color:var(--accent);font-weight:700;margin-bottom:6px;">DIAGNÓSTICO</div>
+            <div style="font-size:0.85rem;color:var(--muted);line-height:1.5;">Lucro &gt; 0 → <span style="color:var(--green)">✔ Viável</span> · Lucro ≤ 0 → <span style="color:var(--red)">✘ Inviável</span></div>
+          </div>
+        </div>
+        <p style="font-size:0.75rem;color:var(--muted);margin-top:20px;line-height:1.5;">
+          ⚠️ Este cálculo considera apenas o custo de combustível. Inclua manutenção, seguro e impostos para uma análise completa.
+        </p>
+      </div>
     </div>
 
-    <h2>Histórico de Cotações</h2>
+    <!-- HISTÓRICO -->
+    <section id="history-section">
+      <h2>
+        Histórico de Cálculos
+        <button onclick="limparHistorico()">Limpar histórico</button>
+      </h2>
+      <div id="history-list"></div>
+    </section>
+  </main>
 
-    <ul id="historico"></ul>
+  <footer>
+    <p>VansMind CLI &mdash; Bootcamp 2 · <a href="https://github.com/lucasdiniz19/bootcamp_2-" target="_blank" rel="noopener">Ver no GitHub</a></p>
+  </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module">
+    import { buscarCotacao } from './src/api.js';
 
-    <script type="module">
+    buscarCotacao()
+      .then(valor => {
+        document.getElementById('ticker-text').textContent =
+          `Dólar hoje: R$ ${valor} (AwesomeAPI)`;
+      })
+      .catch(() => {
+        document.getElementById('ticker-text').textContent = 'Cotação indisponível no momento';
+        document.querySelector('#ticker .dot').style.background = 'var(--red)';
+      });
+  </script>
 
-        import { buscarCotacao } from './src/api.js';
-        import {
-            salvarCotacao,
-            buscarHistorico
-        } from './src/supabase.js';
+  <script>
+    // ─── HISTÓRICO (localStorage) ───────────────────────────────
+    const STORAGE_KEY = 'vansmind_history';
 
-        const el = document.getElementById('api-data');
+    function getHistory() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+      catch { return []; }
+    }
+    function saveHistory(arr) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    }
 
-        try {
+    function renderHistory() {
+      const list = document.getElementById('history-list');
+      const items = getHistory();
+      if (items.length === 0) {
+        list.innerHTML = '<div id="empty-history">Nenhum cálculo realizado ainda. Use a calculadora acima para começar.</div>';
+        return;
+      }
+      list.innerHTML = items.slice().reverse().map(item => `
+        <div class="history-item">
+          <div class="meta">
+            <strong>${item.alunos} alunos · ${item.km} km/dia · R$${item.mensalidade}/mês</strong>
+            <span>${item.date}</span>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:700;margin-bottom:4px;">Lucro: R$ ${item.lucro}</div>
+            <span class="badge ${item.status === 'lucro' ? 'lucro' : 'prejuizo'}">${item.status === 'lucro' ? '✔ Viável' : '✘ Inviável'}</span>
+          </div>
+        </div>
+      `).join('');
+    }
 
-            const valor = await buscarCotacao();
+    window.limparHistorico = function () {
+      if (confirm('Deseja apagar todo o histórico?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        renderHistory();
+      }
+    };
 
-            el.innerText =
-                `Cotação do Dólar hoje: R$ ${valor} (Fonte: AwesomeAPI)`;
+    // ─── CÁLCULO ────────────────────────────────────────────────
+    window.calcular = function () {
+      const preco     = parseFloat(document.getElementById('preco-diesel').value);
+      const distancia = parseFloat(document.getElementById('distancia').value);
+      const alunos    = parseInt(document.getElementById('alunos').value, 10);
+      const mens      = parseFloat(document.getElementById('mensalidade').value);
+      const consumo   = parseFloat(document.getElementById('consumo').value);
+      const dias      = parseInt(document.getElementById('dias').value, 10);
 
-            await salvarCotacao(valor);
+      if ([preco, distancia, alunos, mens, consumo, dias].some(v => isNaN(v) || v <= 0)) {
+        alert('Preencha todos os campos com valores positivos.');
+        return;
+      }
 
-            const historico = await buscarHistorico();
+      const receita    = alunos * mens;
+      const litros     = (distancia * dias) / consumo;
+      const custoComb  = litros * preco;
+      const lucro      = receita - custoComb;
+      const margem     = ((lucro / receita) * 100).toFixed(1);
+      const isLucro    = lucro > 0;
 
-            const lista =
-                document.getElementById('historico');
+      const fmt = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-            lista.innerHTML = '';
+      document.getElementById('res-receita').textContent = fmt(receita);
+      document.getElementById('res-custo').textContent   = fmt(custoComb);
+      document.getElementById('res-lucro').textContent   = fmt(lucro);
+      document.getElementById('res-margem').textContent  = `${margem}%`;
 
-            historico.forEach(item => {
+      const badge = document.getElementById('status-badge');
+      badge.className = `status-badge ${isLucro ? 'lucro' : 'prejuizo'}`;
+      badge.innerHTML = isLucro
+        ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Rota viável — lucro confirmado`
+        : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg> Atenção — rota com prejuízo`;
 
-                const li =
-                    document.createElement('li');
+      document.getElementById('result').style.display = 'block';
 
-                li.innerText =
-                    `R$ ${item.valor} - ${item.data_consulta}`;
+      // Salvar no histórico
+      const now = new Date();
+      const history = getHistory();
+      history.push({
+        date: now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+        alunos, km: distancia, mensalidade: mens.toFixed(2),
+        lucro: fmt(lucro).replace('R$\u00a0', ''),
+        status: isLucro ? 'lucro' : 'prejuizo'
+      });
+      saveHistory(history);
+      renderHistory();
+    };
 
-                lista.appendChild(li);
-
-            });
-
-        } catch (erro) {
-
-            console.error(erro);
-
-        }
-
-    </script>
+    // Inicializar histórico
+    renderHistory();
+  </script>
 
 </body>
 </html>
