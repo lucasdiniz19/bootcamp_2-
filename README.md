@@ -1,267 +1,250 @@
 
+
 # 🚌 VansMind — Calculadora de Viabilidade Financeira
 
-[![Bootcamp CI](https://github.com/lucasdiniz19/bootcamp_2-/actions/workflows/ci.yml/badge.svg)](https://github.com/lucasdiniz19/bootcamp_2-/actions/workflows/ci.yml)
-[![Deploy](https://img.shields.io/badge/deploy-Vercel-black?logo=vercel)](https://bootcamp2-wheat.vercel.app)
+[![Deploy](https://img.shields.io/badge/deploy-Netlify-00C7B7?logo=netlify\&logoColor=white)](https://rainbow-zabaione-82b144.netlify.app/)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen?logo=node.js)](https://nodejs.org)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-
-> Ferramenta web + CLI para motoristas de transporte escolar calcularem a lucratividade real de suas rotas, considerando preço do combustível, distância, número de alunos e mensalidade.
-
-**Deploy:** https://bootcamp2-wheat.vercel.app
+[![Supabase](https://img.shields.io/badge/database-Supabase-3ECF8E?logo=supabase\&logoColor=white)](https://supabase.com)
 
 ---
 
-## 📋 Sumário
+## 📌 Sobre o Projeto
 
-- [Problema & Solução](#-problema--solução)
-- [Funcionalidades](#-funcionalidades)
-- [Stack Tecnológica](#-stack-tecnológica)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Instalação](#-instalação)
-- [Execução](#-execução)
-- [Testes](#-testes)
-- [Lint](#-lint)
-- [CI/CD e Deploy](#-cicd-e-deploy)
-- [Variáveis de Ambiente](#-variáveis-de-ambiente)
-- [Contribuindo](#-contribuindo)
-- [Equipe](#-equipe)
+O **VansMind** é uma aplicação desenvolvida para auxiliar motoristas de transporte escolar na análise da viabilidade financeira de suas rotas.
+
+A plataforma permite calcular receitas, custos operacionais relacionados ao combustível e margem de lucro, oferecendo um diagnóstico rápido sobre a lucratividade da operação.
+
+Além da calculadora financeira, o sistema integra-se com a **AwesomeAPI** para consulta da cotação atual do dólar e utiliza o **Supabase** para armazenar e consultar o histórico dessas cotações.
+
+🌐 **Deploy:** https://rainbow-zabaione-82b144.netlify.app/
+
+📂 **Repositório:** https://github.com/lucasdiniz19/bootcamp_2-
 
 ---
 
-## 🎯 Problema & Solução
+# 🎯 Problema
 
-Motoristas de transporte escolar autônomos frequentemente operam sem visibilidade clara sobre a lucratividade real de suas rotas. Com a oscilação constante dos preços dos combustíveis e variações na ocupação da van, muitos profissionais acumulam **prejuízos ocultos** por não calcularem corretamente a margem líquida após os custos operacionais.
+Muitos motoristas de transporte escolar operam sem uma análise precisa dos custos e receitas de suas rotas.
 
-O **VansMind** automatiza esse cálculo de forma técnica e precisa. O motorista insere dados básicos (preço do diesel, distância, número de alunos, mensalidade) e recebe instantaneamente:
+Com o aumento dos combustíveis e dos custos operacionais, é comum haver prejuízos ocultos por falta de acompanhamento financeiro adequado.
 
-- O **diagnóstico de viabilidade** da rota
-- A **margem líquida** percentual
-- O **histórico de cálculos** anteriores
+O projeto busca fornecer uma ferramenta simples e acessível para apoiar a tomada de decisão baseada em dados reais.
 
 ---
 
-## ✨ Funcionalidades
+# 💡 Solução
 
-| Funcionalidade | Descrição |
-|---|---|
-| 🧮 Calculadora Web | Interface visual com campos de entrada e resultado em tempo real |
-| 💹 Cotação em Tempo Real | Exibe a cotação atual do dólar via AwesomeAPI |
-| 📊 Histórico de Cálculos | Armazena os cálculos anteriores no navegador (localStorage) |
-| ✅ Diagnóstico Visual | Badge colorido indicando "Viável (Lucro)" ou "Inviável (Prejuízo)" |
-| 🖥️ Interface CLI | Modo terminal interativo para uso sem navegador |
-| 🛡️ Validação de Dados | Impede entradas negativas ou zeradas em campos críticos |
-| 🔄 CI Automatizado | Pipeline de testes e lint a cada push/PR via GitHub Actions |
+O VansMind automatiza os cálculos financeiros da rota, permitindo ao usuário:
+
+* Informar os dados da operação.
+* Visualizar receita, custo e lucro estimado.
+* Receber um diagnóstico de viabilidade.
+* Consultar a cotação atual do dólar.
+* Armazenar e recuperar o histórico de cotações através do Supabase.
 
 ---
 
-## 🛠️ Stack Tecnológica
+# ✨ Funcionalidades
 
-| Camada | Tecnologia | Uso |
-|---|---|---|
-| Runtime | **Node.js 20+** | Ambiente de execução |
-| Frontend | **HTML/CSS/JS (ES Modules)** | Interface web |
-| Fonte de dados | **AwesomeAPI** | Cotação do dólar em tempo real |
-| Banco de dados | **Supabase** | Persistência de histórico em nuvem |
-| Testes | **Jest 29** | Testes automatizados |
-| Lint | **ESLint 9** | Análise estática de código |
-| CI | **GitHub Actions** | Pipeline de integração contínua |
-| Deploy | **Vercel** | Hospedagem da interface web |
+### 🧮 Calculadora Financeira
+
+* Receita mensal estimada.
+* Cálculo de custo de combustível.
+* Lucro líquido.
+* Margem percentual de lucro.
+* Diagnóstico de viabilidade da rota.
+
+### 💹 Integração com AwesomeAPI
+
+* Consulta automática da cotação atual do dólar.
+* Exibição em tempo real na interface.
+
+### 🗄️ Integração com Supabase
+
+* Persistência das cotações consultadas.
+* Armazenamento em banco de dados na nuvem.
+* Recuperação do histórico de consultas.
+* Demonstração prática de integração Frontend + Banco de Dados.
+
+### 📊 Histórico
+
+* Registro das consultas realizadas.
+* Exibição organizada dos dados armazenados.
+
+### ✅ Validação de Dados
+
+* Impede valores negativos.
+* Impede entradas inválidas.
+* Melhora a confiabilidade dos cálculos.
+
+### 🔄 Integração Contínua
+
+* GitHub Actions.
+* Execução automática de verificações em Pull Requests e Pushes.
 
 ---
 
-## 📁 Estrutura do Projeto
+# 🛠️ Tecnologias Utilizadas
 
-```
+| Tecnologia              | Finalidade                         |
+| ----------------------- | ---------------------------------- |
+| HTML5                   | Estrutura da interface             |
+| CSS3                    | Estilização                        |
+| JavaScript (ES Modules) | Lógica da aplicação                |
+| Node.js                 | Ambiente de execução               |
+| Jest                    | Testes automatizados               |
+| ESLint                  | Padronização e qualidade de código |
+| GitHub Actions          | Integração contínua                |
+| AwesomeAPI              | Consulta de cotação do dólar       |
+| Supabase                | Banco de dados e persistência      |
+| Netlify                 | Hospedagem da aplicação            |
+
+---
+
+# 📁 Estrutura do Projeto
+
+```text
 bootcamp_2-/
+│
 ├── .github/
 │   └── workflows/
-│       └── ci.yml          # Pipeline de CI (lint + testes)
+│       └── ci.yml
+│
 ├── src/
-│   ├── index.js            # Ponto de entrada CLI
-│   ├── calculadora.js      # Lógica de cálculo de viabilidade
-│   ├── api.js              # Integração com AwesomeAPI (cotação)
-│   └── db.js               # Integração com Supabase (persistência)
-├── index.html              # Interface web principal
+│   ├── api.js
+│   ├── calculadora.js
+│   ├── index.js
+│   └── supabase.js
+│
+├── index.html
 ├── package.json
+├── package-lock.json
 └── README.md
 ```
 
 ---
 
-## 🚀 Instalação
+# 🚀 Instalação
 
-### Pré-requisitos
+## Pré-requisitos
 
-- [Node.js](https://nodejs.org) >= 20.0.0
-- npm >= 9
+* Node.js 20+
+* npm 9+
 
-### Passo a passo
+## Clone o projeto
 
 ```bash
-# 1. Clone o repositório
 git clone https://github.com/lucasdiniz19/bootcamp_2-
 
 cd bootcamp_2-
+```
 
-# 2. Instale as dependências
+## Instale as dependências
+
+```bash
 npm install
+```
 
-# 3. Configure as variáveis de ambiente (veja a seção abaixo)
-cp .env.example .env
+## Configure as variáveis de ambiente
+
+Crie um arquivo `.env`:
+
+```env
+SUPABASE_URL=sua_url_supabase
+SUPABASE_ANON_KEY=sua_chave_supabase
 ```
 
 ---
 
-## ▶️ Execução
+# ▶️ Executando o Projeto
 
-### Interface Web (recomendado)
+## Interface Web
 
-Acesse diretamente o deploy em produção:
-**https://bootcamp2-wheat.vercel.app**
+Acesse diretamente:
 
-Ou, para rodar localmente com um servidor estático:
+https://rainbow-zabaione-82b144.netlify.app/
+
+Ou execute localmente:
 
 ```bash
-# Qualquer servidor estático funciona. Exemplo com npx:
 npx serve .
 ```
 
-> ⚠️ O arquivo `index.html` usa ES Modules (`type="module"`), por isso **não abre corretamente ao ser aberto direto no navegador** via `file://`. Use sempre um servidor HTTP local.
+---
 
-### Modo CLI (terminal)
+## Interface CLI
 
 ```bash
 npm start
 ```
 
-O CLI solicitará os dados interativamente e exibirá o diagnóstico no terminal.
-
 ---
 
-## 🧪 Testes
+# 🧪 Testes
+
+Executar testes automatizados:
 
 ```bash
 npm test
 ```
 
-Os testes cobrem a lógica de cálculo de viabilidade (`src/calculadora.js`) e são executados com Jest no modo ES Modules.
-
 ---
 
-## 🔍 Lint
+# 🔍 Lint
+
+Executar verificação de qualidade do código:
 
 ```bash
 npm run lint
 ```
 
-Verifica a conformidade do código com as regras ESLint configuradas no projeto.
+---
+
+# ⚙️ CI/CD
+
+O projeto utiliza GitHub Actions para:
+
+* Execução automática de testes.
+* Validação do código.
+* Verificação de Pull Requests.
+* Garantia de qualidade antes do merge.
 
 ---
 
-## ⚙️ CI/CD e Deploy
+# 🔐 Banco de Dados (Supabase)
 
-### CI — GitHub Actions
+O projeto utiliza o Supabase como banco de dados em nuvem.
 
-O pipeline é definido em `.github/workflows/ci.yml` e executa automaticamente a cada `push` e `pull_request`:
+As informações relacionadas ao histórico de consultas de cotação do dólar são armazenadas no banco, permitindo:
 
-```yaml
-name: Bootcamp CI
-
-on: [push, pull_request]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm install
-      - run: npm test
-```
-
-**Melhorias recomendadas para o pipeline** (ver [PR description](#) para detalhes):
-
-- Adicionar etapa de `npm run lint` no pipeline
-- Fazer cache das dependências com `actions/cache` para reduzir tempo de build
-- Separar jobs de `lint` e `test` para identificar falhas de forma mais clara
-- Adicionar deploy automático para Vercel via `amondnet/vercel-action`
-
-### Deploy — Vercel
-
-O projeto é hospedado na Vercel com deploy automático a partir da branch `main`. A Vercel detecta automaticamente o projeto como estático (sem framework) e serve o `index.html` como raiz.
-
-**Configuração atual:** Deploy manual via interface da Vercel.
-
-**Melhoria proposta:** Automatizar o deploy via GitHub Actions após a etapa de testes.
+* Registro permanente das consultas.
+* Recuperação do histórico.
+* Demonstração de persistência de dados.
+* Integração com serviços externos.
 
 ---
 
-## 🔐 Variáveis de Ambiente
+# 👥 Equipe
 
-Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
-
-```env
-# Supabase (configurado pelo Integrante 1)
-SUPABASE_URL=https://seu-projeto.supabase.co
-SUPABASE_ANON_KEY=sua-chave-anonima
-```
-
-> **Nunca commite o arquivo `.env` no repositório.** Ele já está no `.gitignore`.
-> Para o deploy na Vercel, configure essas variáveis em **Settings → Environment Variables**.
+| Integrante   | Responsabilidade                                |
+| ------------ | ----------------------------------------------- |
+| Integrante 1 | Integração com Supabase e variáveis de ambiente |
+| Integrante 2 | Persistência e consultas de dados               |
+| Integrante 3 | Testes automatizados                            |
+| Integrante 4 | Interface Web, documentação, CI/CD e deploy     |
 
 ---
 
-## 🤝 Contribuindo
+# 📄 Informações Gerais
 
-1. Crie uma branch a partir de `main`:
-   ```bash
-   git checkout -b feature/nome-da-feature
-   ```
-2. Faça suas alterações e rode os testes:
-   ```bash
-   npm test && npm run lint
-   ```
-3. Faça o commit com mensagem descritiva:
-   ```bash
-   git commit -m "feat: descrição da mudança"
-   ```
-4. Abra um Pull Request descrevendo as alterações.
+**Projeto:** VansMind
 
-### Convenção de commits
-
-| Prefixo | Uso |
-|---|---|
-| `feat:` | Nova funcionalidade |
-| `fix:` | Correção de bug |
-| `docs:` | Documentação |
-| `style:` | Formatação/UI sem mudança de lógica |
-| `refactor:` | Refatoração sem nova feature ou fix |
-| `test:` | Adição ou correção de testes |
-| `ci:` | Mudanças no pipeline de CI/CD |
-
----
-
-## 👥 Equipe
-
-| Integrante | Responsabilidade |
-|---|---|
-| Integrante 1 | Integração com Supabase · Configuração de variáveis de ambiente |
-| Integrante 2 | Persistência de dados · Operações de salvar e consultar |
-| Integrante 3 | Testes automatizados · Cobertura das novas funcionalidades |
-| Integrante 4 | Interface web · Documentação · CI/CD · Deploy |
-
----
-
-## Informações Gerais
-
-**Versão Atual:** 2.0.2
+**Versão:** 2.0.2
 
 **Autor:** João Lucas Trindade Diniz
 
 **Contribuições:** Gustavo Braga e Guilherme Tierno
+
+**Deploy:** https://rainbow-zabaione-82b144.netlify.app/
 
 **Repositório:** https://github.com/lucasdiniz19/bootcamp_2-
